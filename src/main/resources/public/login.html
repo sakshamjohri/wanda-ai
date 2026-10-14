@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!-- Wanda AI Assistant - sign in page. Author: Saksham Johri -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Saksham Johri">
+  <meta name="theme-color" content="#0A0506">
+  <title>Sign in | Wanda AI</title>
+  <link rel="icon" href="/img/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/common.js"></script>
+</head>
+<body>
+<main class="auth">
+  <section class="auth-art">
+    <div class="brand"><img src="/img/logo.svg" alt="">Wanda</div>
+    <div>
+      <h1>Your assistant for answers, files and <em>ideas.</em></h1>
+      <p>Ask anything, talk instead of typing, and drop in documents for instant summaries. Help with writing, code and study, with every conversation saved to your account.</p>
+    </div>
+    <div class="credit">Designed and developed by Saksham Johri</div>
+    <svg class="mark auth-mark" id="mark" aria-hidden="true"></svg>
+  </section>
+
+  <section class="auth-form">
+    <div class="auth-card">
+      <h2 id="formTitle">Welcome back</h2>
+      <p class="sub" id="formSub">Sign in to pick up where you left off.</p>
+
+      <div class="tabs" role="tablist">
+        <button type="button" class="active" data-tab="login" role="tab">Sign in</button>
+        <button type="button" data-tab="register" role="tab">Create account</button>
+      </div>
+
+      <form id="authForm" novalidate>
+        <div class="field" id="nameField" hidden>
+          <label for="displayName">Your name</label>
+          <input id="displayName" autocomplete="name" placeholder="Saksham Johri">
+        </div>
+        <div class="field">
+          <label for="username">Username or email</label>
+          <input id="username" autocomplete="username" required placeholder="saksham or you@gmail.com" autocapitalize="off" spellcheck="false" autofocus>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="pw">
+            <input id="password" type="password" autocomplete="current-password" required placeholder="At least 6 characters">
+            <button type="button" class="icon-btn" id="togglePw" aria-label="Show password">
+              <svg class="i" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+        <p class="form-error" id="error" role="alert"></p>
+        <button class="btn primary" id="submit" type="submit">Sign in</button>
+      </form>
+
+    </div>
+  </section>
+</main>
+<script src="/js/login.js"></script>
+</body>
+</html>

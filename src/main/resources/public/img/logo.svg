@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Wanda mark: a sharp scarlet "W" with a gold spark, in a black badge with a burgundy edge. Designed by Saksham Johri. -->
+  <defs>
+    <linearGradient id="edge" x1="4" y1="2" x2="60" y2="62" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF3B5C"/>
+      <stop offset="1" stop-color="#7A0B22"/>
+    </linearGradient>
+    <linearGradient id="glyph" x1="14" y1="22" x2="50" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF6E86"/>
+      <stop offset="1" stop-color="#F0163F"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="32" cy="36" r="30" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E0143C" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#E0143C" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="18" fill="#0D0405" stroke="url(#edge)" stroke-width="3"/>
+  <rect x="3" y="3" width="58" height="58" rx="16.5" fill="url(#glow)"/>
+  <path d="M15 24 L24 47 L32 31 L40 47 L49 24" stroke="url(#glyph)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M32 9 Q32 16 39 16 Q32 16 32 23 Q32 16 25 16 Q32 16 32 9Z" fill="#FFD9A0" stroke="#FFD9A0" stroke-width="1.6" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,18 @@
+# ------------------------------------------------------------------
+#  Wanda AI - settings
+#  Paste your values after the = sign, save the file, restart Wanda.
+#  This file is listed in .gitignore, so your keys never go to GitHub
+#  (if you upload files by drag and drop instead of git, leave the values empty).
+# ------------------------------------------------------------------
+
+# Free Groq API key from https://console.groq.com/keys (starts with gsk_). This is what makes the chat work.
+# It must be a Groq key; keys from xAI's Grok (xai-...) do not work.
+GROQ_API_KEY=
+
+# Optional: free image creation with Cloudflare Workers AI.
+# Account ID and a Workers AI API token from https://dash.cloudflare.com (see README, section "Image creation").
+CLOUDFLARE_ACCOUNT_ID=
+CLOUDFLARE_API_TOKEN=
+
+# Optional: a different port (default 8080)
+# PORT=8080

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<!-- Wanda AI Assistant - main application. Author: Saksham Johri -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="author" content="Saksham Johri">
+  <meta name="theme-color" content="#0A0506">
+  <title>Wanda AI</title>
+  <link rel="icon" href="/img/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/common.js"></script>
+</head>
+<body>
+
+<!-- Icon sprite (stroke icons drawn on a 24px grid) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
+  <symbol id="i-logout" viewBox="0 0 24 24"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h11"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><path d="m20 11-8.5 8.5a5 5 0 0 1-7-7L13 4a3.5 3.5 0 0 1 5 5l-8.5 8.5a2 2 0 0 1-3-3L14 7"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.5" fill="currentColor"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></symbol>
+  <symbol id="i-speak" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9zM16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-wave" viewBox="0 0 24 24"><path d="M4 10v4M8 6v12M12 3v18M16 7v10M20 10v4"/></symbol>
+  <symbol id="i-retry" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h14v15H6a2 2 0 0 0-2 2zM4 20a2 2 0 0 0 2 2h14v-4"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 16.5V22M8 3h8l-1.3 6.4L18 13.5H6l3.3-4.1z"/></symbol>
+  <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="18.5" cy="12" r="1.5" fill="currentColor"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="m21 16-5-5-9 9"/></symbol>
+  <symbol id="i-ghost" viewBox="0 0 24 24"><path d="M5 21V11a7 7 0 0 1 14 0v10l-2.5-2-2 2-2.5-2-2.5 2-2-2z"/><circle cx="9.7" cy="11" r="1" fill="currentColor"/><circle cx="14.3" cy="11" r="1" fill="currentColor"/></symbol>
+  <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></symbol>
+</svg>
+
+<div class="app" id="app">
+  <!-- Sidebar: history and navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><img src="/img/logo.svg" alt="">Wanda</div>
+    <button class="btn new-chat" id="newChat"><svg class="i"><use href="#i-plus"/></svg>New chat</button>
+    <label class="search"><svg class="i"><use href="#i-search"/></svg><input id="search" placeholder="Search chats" aria-label="Search chats" autocomplete="off"><kbd>⌘K</kbd></label>
+    <nav class="history" id="history" aria-label="Chat history"></nav>
+    <div class="side-nav">
+      <button id="openSettings"><svg class="i"><use href="#i-gear"/></svg>Settings</button>
+    </div>
+    <div class="me">
+      <div class="avatar" id="avatar">W</div>
+      <div class="who"><b id="meName">…</b><span id="meUser"></span></div>
+      <button class="icon-btn" id="logout" title="Sign out" aria-label="Sign out"><svg class="i"><use href="#i-logout"/></svg></button>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <!-- Main column -->
+  <main class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu"><svg class="i"><use href="#i-menu"/></svg></button>
+      <h1 id="chatTitle">New chat</h1>
+      <span class="model-pill" id="modelPill"></span>
+      <button class="icon-btn" id="tempBtn" title="Temporary chat (not saved)" aria-label="Temporary chat, not saved" aria-pressed="false"><svg class="i"><use href="#i-ghost"/></svg></button>
+      <button class="icon-btn" id="exportBtn" title="Export chat" aria-label="Export chat as Markdown"><svg class="i"><use href="#i-download"/></svg></button>
+      <button class="icon-btn" id="themeBtn" title="Switch theme" aria-label="Switch theme"><svg class="i only-dark"><use href="#i-sun"/></svg><svg class="i only-light"><use href="#i-moon"/></svg></button>
+    </header>
+
+    <div class="temp-banner" id="tempBanner" hidden><svg class="i"><use href="#i-ghost"/></svg><span><b>Temporary chat.</b> Not saved to your history, and forgotten when you leave.</span></div>
+
+    <section class="thread" id="thread">
+      <div class="thread-inner" id="messages"></div>
+    </section>
+    <button class="to-bottom" id="toBottom" aria-label="Scroll to latest message" hidden><svg class="i"><use href="#i-down"/></svg></button>
+
+    <div class="composer-wrap">
+      <form class="composer" id="composer">
+        <div class="pending" id="pending" hidden></div>
+        <div class="mode-chip" id="modeChip" hidden><svg class="i"><use href="#i-image"/></svg><span>Image mode: describe the picture you want</span><button type="button" class="icon-btn" id="modeClose" aria-label="Turn off image mode"><svg class="i"><use href="#i-x"/></svg></button></div>
+        <textarea id="input" rows="1" placeholder="Message Wanda" aria-label="Message"></textarea>
+        <div class="composer-row">
+          <button type="button" class="icon-btn" id="attach" title="Attach files" aria-label="Attach files"><svg class="i"><use href="#i-clip"/></svg></button>
+          <input type="file" id="fileInput" multiple hidden
+                 accept=".txt,.md,.csv,.tsv,.json,.xml,.html,.css,.js,.ts,.java,.py,.c,.cpp,.h,.sql,.yml,.yaml,.log,.pdf,.docx,.pptx,.xlsx,.png,.jpg,.jpeg,.webp,.gif">
+          <button type="button" class="icon-btn" id="imageMode" title="Create an image" aria-label="Create an image" aria-pressed="false"><svg class="i"><use href="#i-image"/></svg></button>
+          <div class="spacer"></div>
+          <button type="button" class="icon-btn mic" id="mic" title="Dictate a message" aria-label="Dictate a message"><svg class="i"><use href="#i-mic"/></svg></button>
+          <button type="button" class="icon-btn" id="voiceChat" title="Voice chat" aria-label="Start voice chat"><svg class="i"><use href="#i-wave"/></svg></button>
+          <button type="submit" class="send" id="send" aria-label="Send" disabled><svg class="i"><use href="#i-up"/></svg></button>
+        </div>
+      </form>
+      <p class="hint">Wanda can make mistakes. Check important information.</p>
+    </div>
+  </main>
+</div>
+
+<!-- Options menu of a chat in the sidebar (shown next to the clicked ⋯ button) -->
+<div class="menu" id="convMenu" role="menu" hidden>
+  <button role="menuitem" data-act="pin"><svg class="i"><use href="#i-pin"/></svg><span>Pin chat</span></button>
+  <button role="menuitem" data-act="rename"><svg class="i"><use href="#i-edit"/></svg>Rename</button>
+  <button role="menuitem" data-act="delete" class="danger"><svg class="i"><use href="#i-trash"/></svg>Delete</button>
+</div>
+
+<!-- Confirmation -->
+<dialog id="confirmDlg" class="small">
+  <div class="dlg-body">
+    <h3 id="confirmTitle">Are you sure?</h3>
+    <p id="confirmText"></p>
+  </div>
+  <div class="dlg-foot">
+    <button class="btn" id="confirmNo">Cancel</button>
+    <button class="btn danger-fill" id="confirmYes">Delete</button>
+  </div>
+</dialog>
+
+<!-- Settings -->
+<dialog id="settingsDlg">
+  <div class="dlg-head"><h3>Settings</h3><button class="icon-btn" data-close aria-label="Close"><svg class="i"><use href="#i-x"/></svg></button></div>
+  <div class="settings-grid">
+    <div class="settings-nav">
+      <button class="active" data-pane="general">General</button>
+      <button data-pane="model">Model</button>
+      <button data-pane="images">Images</button>
+      <button data-pane="voice">Voice</button>
+      <button data-pane="data">Data</button>
+      <button data-pane="about">About</button>
+    </div>
+    <div class="settings-pane">
+      <div data-pane="general">
+        <h4>General</h4>
+        <div class="field"><label for="sDisplayName">Display name</label><input id="sDisplayName" maxlength="60"></div>
+        <div class="field-label">Appearance</div>
+        <div class="theme-pick">
+          <button type="button" data-theme="system"><div class="swatch system"><i></i><i></i></div>System</button>
+          <button type="button" data-theme="light"><div class="swatch light"><i></i><i></i></div>Light</button>
+          <button type="button" data-theme="dark"><div class="swatch dark"><i></i><i></i></div>Dark</button>
+        </div>
+      </div>
+      <div data-pane="model" hidden>
+        <h4>Model</h4>
+        <div class="field">
+          <label for="sKey">Groq API key</label>
+          <input id="sKey" type="password" autocomplete="off" placeholder="gsk_...">
+          <small id="keyStatus" class="key-status"></small>
+        </div>
+        <div class="field">
+          <label for="sThinking">Reply style</label>
+          <select id="sThinking">
+            <option value="fast">Fast: answers quickly (recommended)</option>
+            <option value="balanced">Balanced: thinks a little first</option>
+            <option value="deep">Deep: thinks hard, slower</option>
+          </select>
+          <small>Applies to the default model. Harder questions (maths, code) benefit from Balanced or Deep.</small>
+        </div>
+        <div class="field">
+          <label for="sModel">Model</label>
+          <input id="sModel" list="models" placeholder="Automatic (recommended)">
+          <datalist id="models"><option value="openai/gpt-oss-120b"><option value="openai/gpt-oss-20b"><option value="qwen/qwen3.8-27b"></datalist>
+          <small>Leave empty to use Groq's recommended model automatically.</small>
+        </div>
+        <div class="field">
+          <label for="sTemp">Creativity <b id="tempVal"></b></label>
+          <input id="sTemp" type="range" min="0" max="1.5" step="0.1">
+        </div>
+        <div class="field">
+          <label for="sPrompt">Custom instructions</label>
+          <textarea id="sPrompt" rows="5" maxlength="4000"></textarea>
+          <small>Applied to every new reply.</small>
+        </div>
+      </div>
+      <div data-pane="images" hidden>
+        <h4>Images</h4>
+        <p class="pane-note">Wanda draws pictures with FLUX on Cloudflare Workers AI. Cloudflare's free plan includes a daily allowance, and when it runs out you simply get an error (you are never charged).</p>
+        <ol class="steps">
+          <li>Create a free account at <a href="https://dash.cloudflare.com/sign-up" target="_blank" rel="noopener">cloudflare.com</a>.</li>
+          <li>In the dashboard open <b>AI → Workers AI</b>, choose <b>Use REST API</b> and copy your <b>Account ID</b>.</li>
+          <li>On the same page click <b>Create a Workers AI API Token</b> and copy the token.</li>
+        </ol>
+        <div class="field"><label for="sImgAccount">Account ID</label><input id="sImgAccount" autocomplete="off" spellcheck="false" placeholder="32 letters and numbers"></div>
+        <div class="field">
+          <label for="sImgToken">API token</label>
+          <input id="sImgToken" type="password" autocomplete="off" placeholder="Paste your token">
+          <small id="imgStatus" class="key-status"></small>
+        </div>
+      </div>
+      <div data-pane="voice" hidden>
+        <h4>Voice</h4>
+        <p class="pane-note">Use the microphone to dictate a message, or the waveform button for a hands-free voice chat where Wanda answers out loud.</p>
+        <div class="row-toggle">
+          <div>Voice features<small>Microphone, voice chat and read-aloud buttons. Turn off for a text-only Wanda.</small></div>
+          <label class="switch"><input type="checkbox" id="sVoiceFeatures"><span></span></label>
+        </div>
+        <div id="voiceOptions">
+          <div class="row-toggle">
+            <div>Wanda speaks in voice chat<small>Turn off to talk to Wanda and read the answers on screen instead.</small></div>
+            <label class="switch"><input type="checkbox" id="sVoiceReplies"><span></span></label>
+          </div>
+          <div class="row-toggle">
+            <div>Read every reply aloud<small>In normal chats, Wanda speaks each new answer automatically.</small></div>
+            <label class="switch"><input type="checkbox" id="sAutoSpeak"><span></span></label>
+          </div>
+          <div class="field">
+            <label for="sVoice">Voice</label>
+            <select id="sVoice"></select>
+          </div>
+          <button type="button" class="btn" id="testVoice"><svg class="i"><use href="#i-speak"/></svg>Play sample</button>
+        </div>
+        <p class="key-status" id="micSupport" style="margin-top:16px"></p>
+      </div>
+      <div data-pane="data" hidden>
+        <h4>Data</h4>
+        <p class="pane-note">Chats and settings are stored in the Wanda database on this server.</p>
+        <button type="button" class="btn danger" id="clearAll"><svg class="i"><use href="#i-trash"/></svg>Delete all chats</button>
+      </div>
+      <div data-pane="about" hidden>
+        <h4>About</h4>
+        <p class="pane-note">Wanda AI Assistant. Designed and developed by Saksham Johri.</p>
+        <div class="field-label">Keyboard shortcuts</div>
+        <ul class="shortcuts">
+          <li><span>Send message</span><kbd>Enter</kbd></li>
+          <li><span>New line</span><kbd>Shift</kbd> + <kbd>Enter</kbd></li>
+          <li><span>Search chats</span><kbd>Ctrl</kbd> / <kbd>⌘</kbd> + <kbd>K</kbd></li>
+          <li><span>End voice chat</span><kbd>Esc</kbd></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="dlg-foot">
+    <p class="form-error" id="settingsError" role="alert"></p>
+    <button class="btn" data-close>Cancel</button>
+    <button class="btn primary" id="saveSettings">Save changes</button>
+  </div>
+</dialog>
+
+<!-- Hands-free voice chat -->
+<div class="voice" id="voiceOverlay" hidden role="dialog" aria-label="Voice chat">
+  <button class="voice-orb" id="voiceOrb" aria-label="Tap to stop Wanda speaking and talk"><svg class="mark" id="voiceMark" aria-hidden="true"></svg></button>
+  <p class="voice-status" id="voiceStatus" aria-live="polite">Listening…</p>
+  <p class="voice-heard" id="voiceHeard"></p>
+  <div class="voice-actions">
+    <button class="btn" id="voiceMute" aria-pressed="false"><svg class="i"><use href="#i-speak"/></svg><span>Wanda's voice: on</span></button>
+    <button class="btn" id="voiceEnd"><svg class="i"><use href="#i-x"/></svg>End voice chat</button>
+  </div>
+</div>
+
+<!-- Messages that pop up above everything, including open dialogs -->
+<div id="toasts" popover="manual" aria-live="polite"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>
